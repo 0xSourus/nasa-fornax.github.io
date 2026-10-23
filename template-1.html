@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Subdomain Takeover PoC — JEET Cybersec</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(circle at 50% 30%, #0f172a 0%, #020617 70%);
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    color: #e2e8f0;
+    padding: 20px;
+  }
+  .card {
+    max-width: 720px;
+    width: 100%;
+    background: rgba(15, 23, 42, 0.85);
+    border: 1px solid #1e293b;
+    border-radius: 16px;
+    padding: 48px 40px;
+    text-align: center;
+    box-shadow: 0 25px 60px rgba(0,0,0,0.6), 0 0 40px rgba(56,189,248,0.08);
+    position: relative;
+    overflow: hidden;
+  }
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #38bdf8, #a855f7, #f43f5e);
+  }
+  .skull {
+    font-size: 56px;
+    margin-bottom: 16px;
+    filter: drop-shadow(0 0 12px rgba(244,63,94,0.6));
+  }
+  h1 {
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+    background: linear-gradient(90deg, #38bdf8, #a855f7);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .subtitle {
+    font-size: 15px;
+    color: #94a3b8;
+    margin-bottom: 32px;
+  }
+  .hostname {
+    display: inline-block;
+    background: #020617;
+    border: 1px dashed #f43f5e;
+    color: #f43f5e;
+    font-family: 'Courier New', monospace;
+    font-size: 16px;
+    padding: 12px 20px;
+    border-radius: 8px;
+    margin-bottom: 32px;
+    word-break: break-all;
+  }
+  .info {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 32px;
+    text-align: left;
+  }
+  .info div {
+    background: #0b1220;
+    border: 1px solid #1e293b;
+    border-radius: 10px;
+    padding: 14px 16px;
+  }
+  .info span {
+    display: block;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #64748b;
+    margin-bottom: 4px;
+  }
+  .info strong {
+    font-size: 14px;
+    color: #e2e8f0;
+    font-weight: 600;
+    word-break: break-all;
+  }
+  .badge {
+    display: inline-block;
+    background: rgba(244,63,94,0.15);
+    color: #f43f5e;
+    border: 1px solid rgba(244,63,94,0.4);
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+  }
+  .footer {
+    font-size: 13px;
+    color: #64748b;
+    border-top: 1px solid #1e293b;
+    padding-top: 20px;
+  }
+  .footer strong {
+    color: #38bdf8;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+  @media (max-width: 520px) {
+    .info { grid-template-columns: 1fr; }
+    .card { padding: 32px 22px; }
+    h1 { font-size: 22px; }
+  }
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="skull">☠️</div>
+    <div class="badge">Subdomain Takeover</div>
+    <h1>Proof of Concept</h1>
+    <p class="subtitle">This subdomain was successfully hijacked to demonstrate a takeover vulnerability.</p>
+
+    <div class="hostname" id="hostname">subdomain.example.com</div>
+
+    <div class="info">
+      <div>
+        <span>Researcher</span>
+        <strong>jeetcybersec</strong>
+      </div>
+      <div>
+        <span>Vulnerability</span>
+        <strong>Subdomain Takeover</strong>
+      </div>
+      <div>
+        <span>Discovered On</span>
+        <strong id="date">—</strong>
+      </div>
+      <div>
+        <span>Severity</span>
+        <strong>High / Critical</strong>
+      </div>
+    </div>
+
+    <div class="footer">
+      Reported by <strong>JEET Cybersec</strong><br>
+      This page contains no malicious content — for responsible disclosure only.
+    </div>
+  </div>
+
+  <script>
+    // Auto-fill current hostname
+    document.getElementById('hostname').textContent = window.location.hostname || 'subdomain.example.com';
+    // Auto-fill date
+    document.getElementById('date').textContent = new Date().toLocaleDateString('en-US', {
+      year: 'numeric', month: 'short', day: 'numeric'
+    });
+  </script>
+</body>
+</html>
